@@ -2,7 +2,7 @@
 # File: guessinggame.sh
 
 fid () {
-	n=$(ls | wc -l)
+	n=$(ls -a | wc -l)
 }
 
 clear
@@ -19,7 +19,12 @@ do
   echo -n "     Guess the number of files in this directory: "
   read response
   echo
-  if [[ $response -gt $n ]]
+  if [[ -n ${response//[0-9]/} ]]
+  then
+    echo "$response is not a number, try again."
+    echo
+    echo
+  elif [[ $response -gt $n ]]
   then
     echo "Your guess of $response is too high."
     echo
